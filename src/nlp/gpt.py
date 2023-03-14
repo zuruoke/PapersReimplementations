@@ -135,7 +135,7 @@ def get_batch(string, ctoi, batch_size, context_length, device="cpu"):
 
 
 class GPT(nn.Module):
-    def __init__(self, vocab_size, context_length, depth, embed_dim, n_heads):
+    def __init__(self, vocab_size, context_length, depth, embed_dim, n_heads, dropout=0.1, mlp_scale=4, activation=nn.GELU):
         super(GPT, self).__init__()
 
         self.vocab_size = vocab_size
@@ -149,7 +149,7 @@ class GPT(nn.Module):
         self.pos_embedding = nn.Embedding(context_length, embed_dim)
 
         # Decoder blocks
-        self.blocks = DecoderBlocks(depth, embed_dim, n_heads)
+        self.blocks = DecoderBlocks(depth, embed_dim, n_heads, dropout, mlp_scale, activation)
 
         # Final layer norm and linear layer to get final prediction
         self.ln = nn.LayerNorm(embed_dim)
