@@ -1,6 +1,7 @@
 torch
 torchvision
 pytorch-lightning
+transformers
 tensorboard
 numpy
 matplotlib
